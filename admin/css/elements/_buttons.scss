@@ -1,0 +1,40 @@
+.btn {
+  padding: 7px 15px;
+  border-radius: 5px;
+  transition: all 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  width: max-content;
+}
+
+.btn_red {
+  color: #000000B0;
+  background: #ff263d90;
+  &:hover {
+    box-shadow: 0 0 10px #ff263d90;
+    background: #ff263d;
+    color: #ffffff;
+  }
+}
+
+.btn_green {
+  color: #000000B0;
+  background: #4FBF2690;
+  &:hover {
+    box-shadow: 0 0 10px #4FBF2690;
+    background: #4FBF26;
+    color: #ffffff;
+  }
+}
+
+.btn_orange {
+  color: #000000B0;
+  background: #ffa50090;
+  &:hover {
+    box-shadow: 0 0 10px #ffa50090;
+    background: #ffa500;
+    color: #ffffff;
+  }
+}
