@@ -2,7 +2,13 @@
 
 $id = Router::getNext();
 
-$movie = new Movie($id);
+try {
+    $movie = new Movie($id);
+} catch (\Exceptions\MovieNotFound $e) {
+    http_response_code(404);
+    include $_SERVER['DOCUMENT_ROOT'] . '/404.html';
+    return;
+}
 
 $genres = array_map(
     function ($value) { return '<a href="/genre/'.urlencode(strtolower($value)).'">'.$value.'</a>'; },

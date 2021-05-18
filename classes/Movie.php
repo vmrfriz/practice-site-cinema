@@ -6,9 +6,13 @@ class Movie
     {
         $sql = 'SELECT * FROM `films` WHERE `id` = ' . $id . ' LIMIT 1';
 
-        $data = \Database::getConnection()
-            ->query($sql)
-            ->fetch_assoc();
+        $db_result = \Database::getConnection()->query($sql);
+
+        if (!$db_result->num_rows) {
+            throw new \Exceptions\MovieNotFound();
+        }
+
+        $data = $db_result->fetch_assoc();
 
         $this->id = $data['id'];
         $this->name = $data['name'];
@@ -27,11 +31,9 @@ class Movie
             JOIN `actors` ON `fa`.`actor_id` = `actors`.`id`
             WHERE `fa`.`film_id` = ' . $this->id;
 
-        $data = \Database::getConnection()
-            ->query($sql)
-            ->fetch_all(MYSQLI_ASSOC);
+        $data = \Database::getConnection()->query($sql);
 
-        return $data ?: [];
+        return $data ? $data->fetch_all(MYSQLI_ASSOC) : [];
     }
 
     public function getGenres(): array {
@@ -40,20 +42,16 @@ class Movie
             JOIN `genres` ON `fa`.`genre_id` = `genres`.`id`
             WHERE `fa`.`film_id` = ' . $this->id;
 
-        $data = \Database::getConnection()
-            ->query($sql)
-            ->fetch_all(MYSQLI_ASSOC);
+        $data = \Database::getConnection()->query($sql);
 
-        return $data ?: [];
+        return $data ? $data->fetch_all(MYSQLI_ASSOC) : [];
     }
 
     public function getMedia(): array {
         $sql ='SELECT * FROM `media` WHERE `film_id` = ' . $this->id;
 
-        $data = \Database::getConnection()
-            ->query($sql)
-            ->fetch_all(MYSQLI_ASSOC);
+        $data = \Database::getConnection()->query($sql);
 
-        return $data ?: [];
+        return $data ? $data->fetch_all(MYSQLI_ASSOC) : [];
     }
 }
