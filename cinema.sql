@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 18 2021 г., 00:44
+-- Время создания: Май 19 2021 г., 01:22
 -- Версия сервера: 10.4.12-MariaDB
 -- Версия PHP: 7.2.29
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `actors` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(64) NOT NULL,
   `photo_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,7 +39,10 @@ CREATE TABLE `actors` (
 
 INSERT INTO `actors` (`id`, `name`, `photo_url`) VALUES
 (1, 'Robert Downey Jr.', 'images/uploads/cast1.jpg'),
-(2, 'Chris Hemsworth', 'images/uploads/cast2.jpg');
+(2, 'Chris Hemsworth', 'images/uploads/cast2.jpg'),
+(3, 'Scarlett Johansson', ''),
+(4, 'Adam Driver', ''),
+(5, 'Laura Dern', '');
 
 -- --------------------------------------------------------
 
@@ -53,7 +56,7 @@ CREATE TABLE `films` (
   `description` text NOT NULL,
   `poster` varchar(255) NOT NULL,
   `release_date` date NOT NULL,
-  `director` varchar(255) NOT NULL,
+  `director` varchar(64) NOT NULL,
   `duration` int(10) UNSIGNED NOT NULL,
   `trailer_url` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL
@@ -64,7 +67,8 @@ CREATE TABLE `films` (
 --
 
 INSERT INTO `films` (`id`, `name`, `description`, `poster`, `release_date`, `director`, `duration`, `trailer_url`, `created_at`) VALUES
-(1, 'Skyfall: Quantum of Spectre', 'Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth\'s mightiest heroes must come together once again to protect the world from global extinction.', '/images/uploads/movie-single.jpg', '2015-05-01', 'Joss Whedon', 141, 'https://www.youtube.com/embed/o-0hcF97wy0', '2021-05-17 18:59:19');
+(1, 'Skyfall: Quantum of Spectre', 'Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth\'s mightiest heroes must come together once again to protect the world from global extinction.', '/images/uploads/movie-single.jpg', '2015-05-01', 'Joss Whedon', 141, 'https://www.youtube.com/embed/o-0hcF97wy0', '2021-05-17 18:59:19'),
+(2, 'Marriage Story', 'Marriage Story is a 2019 British-American drama film written and directed by Noah Baumbach, who produced the film with David Heyman. It stars Scarlett Johansson and Adam Driver, with Laura Dern, Alan Alda, Ray Liotta, Julie Hagerty, and Merritt Wever in supporting roles. The film follows a married couple, an actress and a stage director (Johansson and Driver), going through a coast-to-coast divorce. ', '/images/uploads/MarriageStoryPoster.png', '2019-11-15', 'Noah Baumbach', 136, '', '2021-05-19 20:56:45');
 
 -- --------------------------------------------------------
 
@@ -83,7 +87,10 @@ CREATE TABLE `films_actors` (
 
 INSERT INTO `films_actors` (`film_id`, `actor_id`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(2, 3),
+(2, 4),
+(2, 5);
 
 -- --------------------------------------------------------
 
@@ -103,7 +110,8 @@ CREATE TABLE `films_genres` (
 INSERT INTO `films_genres` (`film_id`, `genre_id`) VALUES
 (1, 1),
 (1, 2),
-(1, 3);
+(1, 3),
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -123,7 +131,8 @@ CREATE TABLE `genres` (
 INSERT INTO `genres` (`id`, `title`) VALUES
 (1, 'Action'),
 (2, 'Sci-Fi'),
-(3, 'Adventure');
+(3, 'Adventure'),
+(4, 'Dramas');
 
 -- --------------------------------------------------------
 
@@ -222,19 +231,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `actors`
 --
 ALTER TABLE `actors`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `films`
 --
 ALTER TABLE `films`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `media`
