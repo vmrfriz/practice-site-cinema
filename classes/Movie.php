@@ -1,6 +1,6 @@
 <?php
 
-class Film
+class Movie
 {
     public function __construct(int $id)
     {

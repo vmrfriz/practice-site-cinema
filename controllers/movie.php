@@ -2,10 +2,11 @@
 
 $id = Router::getNext();
 
-$film = new Film($id);
+$movie = new Movie($id);
+
 $genres = array_map(
     function ($value) { return '<a href="/genre/'.urlencode(strtolower($value)).'">'.$value.'</a>'; },
-    array_column($film->getGenres(), 'title')
+    array_column($movie->getGenres(), 'title')
 );
 $genres = implode(', ', $genres);
 
