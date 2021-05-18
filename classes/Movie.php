@@ -2,8 +2,21 @@
 
 class Movie
 {
-    public function __construct(int $id)
+    protected function __construct($data)
     {
+        $this->id = $data['id'];
+        $this->name = $data['name'];
+        $this->description = $data['description'];
+        $this->short_description = strlen($this->description) > 150 ? substr($this->description, 0, 150) . '...' : $this->description;
+        $this->poster = $data['poster'];
+        $this->director = $data['director'];
+        $this->duration = $data['duration'];
+        $this->trailer_url = $data['trailer_url'];
+        $this->release_date = date('d.m.Y', strtotime($data['release_date']));
+        $this->created_at = $data['created_at'];
+    }
+
+    public static function getById(int $id) {
         $sql = 'SELECT * FROM `films` WHERE `id` = ' . $id . ' LIMIT 1';
 
         $db_result = \Database::getConnection()->query($sql);
@@ -13,6 +26,8 @@ class Movie
         }
 
         $data = $db_result->fetch_assoc();
+        return new static($data);
+    }
 
         $this->id = $data['id'];
         $this->name = $data['name'];
