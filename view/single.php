@@ -16,12 +16,12 @@
         <div class="row ipad-width2">
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="movie-img sticky-sb">
-                    <img src="<?=$movie->poster ?>" alt="">
+                    <img src="<?=$this->movie->poster ?>" alt="">
                     <div class="movie-btn">
-                        <?php if ($movie->trailer_url): ?>
+                        <?php if ($this->movie->trailer_url): ?>
                         <div class="btn-transform transform-vertical red">
                             <div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
-                            <div><a href="<?=$movie->trailer_url ?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+                            <div><a href="<?=$this->movie->trailer_url ?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
                         </div>
                         <?php endif; ?>
                         <div class="btn-transform transform-vertical">
@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="movie-single-ct main-content">
-                    <h1 class="bd-hd"><?=$movie->name ?> <span><?=date('Y', strtotime($movie->release_date)) ?></span></h1>
+                    <h1 class="bd-hd"><?=$this->movie->name ?> <span><?=date('Y', strtotime($this->movie->release_date)) ?></span></h1>
                     <div class="movie-tabs">
                         <div class="tabs">
                             <ul class="tab-links tabs-mv">
@@ -45,7 +45,7 @@
                                 <div id="overview" class="tab active">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <p><?=$movie->description ?></p>
+                                            <p><?=$this->movie->description ?></p>
                                             <div class="title-hd-sm">
                                                 <h4>Videos & Photos</h4>
                                                 <a href="#" class="time">All 5 Videos & 245 Photos <i class="ion-ios-arrow-right"></i></a>
@@ -63,19 +63,21 @@
                                         <div class="col-md-4 col-xs-12 col-sm-12">
                                             <div class="sb-it">
                                                 <h6>Director: </h6>
-                                                <p><a href="/director/<?=urlencode(strtolower($movie->director)) ?>"><?=$movie->director ?></a></p>
+                                                <p><a href="/director/<?=urlencode(strtolower($this->movie->director)) ?>"><?=$this->movie->director ?></a></p>
                                             </div>
+                                            <?php if ($this->genres): ?>
                                             <div class="sb-it">
                                                 <h6>Genres:</h6>
-                                                <p><?=$genres ?></p>
+                                                <p><?=$this->genres ?></p>
                                             </div>
+                                            <?php endif; ?>
                                             <div class="sb-it">
                                                 <h6>Release Date:</h6>
-                                                <p><?=$movie->release_date ?></p>
+                                                <p><?=$this->movie->release_date ?></p>
                                             </div>
                                             <div class="sb-it">
                                                 <h6>Run Time:</h6>
-                                                <p><?=$movie->duration ?> min</p>
+                                                <p><?=$this->movie->duration ?> min</p>
                                             </div>
                                         </div>
                                     </div>
@@ -89,7 +91,7 @@
                                             <div class="cast-it">
                                                 <div class="cast-left">
                                                     <h4>DR</h4>
-                                                    <a href="/director/<?=urlencode(strtolower($movie->director))?>"><?=$movie->director ?></a>
+                                                    <a href="/director/<?=urlencode(strtolower($this->movie->director))?>"><?=$this->movie->director ?></a>
                                                 </div>
                                             </div>
                                         </div>

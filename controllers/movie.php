@@ -16,6 +16,4 @@ $genres = array_map(
 );
 $genres = implode(', ', $genres);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/view/header.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/view/single.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/view/footer.php';
+new View('single', compact('movie', 'genres'));
