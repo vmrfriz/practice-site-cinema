@@ -2,12 +2,11 @@
 
 class Movie
 {
-    protected function __construct($data)
-    {
+    public function __construct(array $data) {
         $this->id = $data['id'];
         $this->name = $data['name'];
         $this->description = $data['description'];
-        $this->short_description = strlen($this->description) > 150 ? substr($this->description, 0, 150) . '...' : $this->description;
+        $this->short_description = (strlen($this->description) < 150) ? $this->description : (substr($this->description, 0, 150) . '...');
         $this->poster = $data['poster'];
         $this->director = $data['director'];
         $this->duration = $data['duration'];
@@ -26,18 +25,18 @@ class Movie
         }
 
         $data = $db_result->fetch_assoc();
+
         return new static($data);
     }
 
-        $this->id = $data['id'];
-        $this->name = $data['name'];
-        $this->description = $data['description'];
-        $this->poster = $data['poster'];
-        $this->director = $data['director'];
-        $this->duration = $data['duration'];
-        $this->trailer_url = $data['trailer_url'];
-        $this->release_date = date('d.m.Y', strtotime($data['release_date']));
-        $this->created_at = $data['created_at'];
+    public static function getLimit(int $limit, int $offset = 0): MovieCollection {
+        $sql = 'SELECT * FROM films OFFSET LIMIT ' . $limit . ' OFFSET ' . $offset;
+        $data = Database::getConnection()->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $movies = new MovieCollection;
+        foreach ($data as $movie) {
+            $movies->add( new static($movie) );
+        }
+        return $movies;
     }
 
     public function getCast(): array {
