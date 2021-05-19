@@ -10,10 +10,19 @@ try {
     return;
 }
 
+
+
+$movie->director = Human::getById($movie->director_id);
+$movie->actors = Human::getFilmActors($movie->id);
+$movie->media = Media::getFilmMedia($movie->id);
+
+
 $genres = array_map(
     function ($value) { return '<a href="/genre/'.urlencode(strtolower($value)).'">'.$value.'</a>'; },
     array_column($movie->getGenres(), 'title')
 );
 $genres = implode(', ', $genres);
+
+
 
 new View('single', compact('movie', 'genres'));

@@ -39,31 +39,32 @@
                             <ul class="tab-links tabs-mv">
                                 <li class="active"><a href="#overview">Overview</a></li>
                                 <li><a href="#cast">  Cast & Crew </a></li>
-                                <li><a href="#media"> Media</a></li> 
+                                <?php if ($this->movie->media): ?>
+                                <li><a href="#media"> Media</a></li>
+                                <?php endif; ?>
                             </ul>
                             <div class="tab-content">
                                 <div id="overview" class="tab active">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-12 col-xs-12">
                                             <p><?=$this->movie->description ?></p>
+
+                                            <?php if ($this->movie->media): ?>
                                             <div class="title-hd-sm">
                                                 <h4>Videos & Photos</h4>
-                                                <a href="#" class="time">All 5 Videos & 245 Photos <i class="ion-ios-arrow-right"></i></a>
                                             </div>
                                             <div class="mvsingle-item ov-item">
-                                                <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image11.jpg" ><img src="/images/uploads/image1.jpg" alt=""></a>
-                                                <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image21.jpg" ><img src="/images/uploads/image2.jpg" alt=""></a>
-                                                <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image31.jpg" ><img src="/images/uploads/image3.jpg" alt=""></a>
-                                                <div class="vd-it">
-                                                    <img class="vd-img" src="/images/uploads/image4.jpg" alt="">
-                                                    <a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
-                                                </div>
+                                                <?php $i = 0; ?>
+                                                <?php foreach ($this->movie->media as $media): if ($i++ < 4): ?>
+                                                <a class="img-lightbox"  data-fancybox-group="gallery" href="<?=$media->url ?>" ><img src="<?=$media->thumb ?>" alt=""></a>
+                                                <?php endif; endforeach ?>
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="col-md-4 col-xs-12 col-sm-12">
                                             <div class="sb-it">
                                                 <h6>Director: </h6>
-                                                <p><a href="/director/<?=urlencode(strtolower($this->movie->director)) ?>"><?=$this->movie->director ?></a></p>
+                                                <p><a href="/director/<?=$this->movie->director->id ?>"><?=$this->movie->director->name ?></a></p>
                                             </div>
                                             <?php if ($this->genres): ?>
                                             <div class="sb-it">
@@ -84,103 +85,56 @@
                                 </div>
                                 <div id="cast" class="tab">
                                     <div class="row">
+                                        <?php if ($this->movie->director): ?>
                                         <div class="title-hd-sm">
                                             <h4>Directors & Credit Writers</h4>
                                         </div>
                                         <div class="mvcast-item">
                                             <div class="cast-it">
                                                 <div class="cast-left">
-                                                    <h4>DR</h4>
-                                                    <a href="/director/<?=urlencode(strtolower($this->movie->director))?>"><?=$this->movie->director ?></a>
+                                                    <h4><?=$this->movie->director->getInitials() ?></h4>
+                                                    <a href="/director/<?=urlencode(strtolower($this->movie->director->id))?>"><?=$this->movie->director->name ?></a>
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php endif; ?>
                                         <!-- //== -->
+
+                                        <?php if ($this->movie->actors): ?>
                                         <div class="title-hd-sm">
                                             <h4>Cast</h4>
                                         </div>
                                         <div class="mvcast-item">
+                                            <?php foreach ($this->movie->actors as $actor): ?>
                                             <div class="cast-it">
                                                 <div class="cast-left">
-                                                    <img src="/images/uploads/cast1.jpg" alt="">
-                                                    <a href="#">Robert Downey Jr.</a>
+                                                    <?php if ($actor->photo): ?>
+                                                    <img src="<?=$actor->photo ?>" alt="">
+                                                    <?php else: ?>
+                                                    <h4><?=$actor->getInitials() ?></h4>
+                                                    <?php endif; ?>
+                                                    <a href="#"><?=$actor->name ?></a>
                                                 </div>
                                             </div>
-                                            <div class="cast-it">
-                                                <div class="cast-left">
-                                                    <img src="/images/uploads/cast2.jpg" alt="">
-                                                    <a href="#">Chris Hemsworth</a>
-                                                </div>
-                                            </div>
-                                            <div class="cast-it">
-                                                <div class="cast-left">
-                                                    <img src="/images/uploads/cast3.jpg" alt="">
-                                                    <a href="#">Mark Ruffalo</a>
-                                                </div>
-                                            </div>
-                                            <div class="cast-it">
-                                                <div class="cast-left">
-                                                    <img src="/images/uploads/cast4.jpg" alt="">
-                                                    <a href="#">Chris Evans</a>
-                                                </div>
-                                            </div>
-                                            <div class="cast-it">
-                                                <div class="cast-left">
-                                                    <img src="/images/uploads/cast5.jpg" alt="">
-                                                    <a href="#">Scarlett Johansson</a>
-                                                </div>
-                                            </div>
-                                            <div class="cast-it">
-                                                <div class="cast-left">
-                                                    <img src="/images/uploads/cast6.jpg" alt="">
-                                                    <a href="#">Jeremy Renner</a>
-                                                </div>
-                                            </div>
-                                            <div class="cast-it">
-                                                <div class="cast-left">
-                                                    <img src="/images/uploads/cast7.jpg" alt="">
-                                                    <a href="#">James Spader</a>
-                                                </div>
-                                            </div>
-                                            <div class="cast-it">
-                                                <div class="cast-left">
-                                                    <img src="/images/uploads/cast9.jpg" alt="">
-                                                    <a href="#">Don Cheadle</a>
-                                                </div>
-                                            </div>
+                                            <?php endforeach; ?>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
-                                    </div>
-                                    <div id="media" class="tab">
+                                </div>
+                                <?php if ($this->movie->media): ?>
+                                <div id="media" class="tab">
                                     <div class="row">
                                         <div class="title-hd-sm">
                                             <h4>Photos <span> (21)</span></h4>
                                         </div>
                                         <div class="mvsingle-item">
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image11.jpg" ><img src="/images/uploads/image1.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery"  href="/images/uploads/image21.jpg" ><img src="/images/uploads/image2.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image31.jpg" ><img src="/images/uploads/image3.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image41.jpg" ><img src="/images/uploads/image4.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image51.jpg" ><img src="/images/uploads/image5.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image61.jpg" ><img src="/images/uploads/image6.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image71.jpg" ><img src="/images/uploads/image7.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image81.jpg" ><img src="/images/uploads/image8.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image91.jpg" ><img src="/images/uploads/image9.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image101.jpg" ><img src="/images/uploads/image10.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image111.jpg" ><img src="/images/uploads/image1-1.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image121.jpg" ><img src="/images/uploads/image12.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image131.jpg" ><img src="/images/uploads/image13.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image141.jpg" ><img src="/images/uploads/image14.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image151.jpg" ><img src="/images/uploads/image15.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image161.jpg" ><img src="/images/uploads/image16.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image171.jpg" ><img src="/images/uploads/image17.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image181.jpg" ><img src="/images/uploads/image18.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image191.jpg" ><img src="/images/uploads/image19.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image201.jpg" ><img src="/images/uploads/image20.jpg" alt=""></a>
-                                            <a class="/img-lightbox"  data-fancybox-group="gallery" href="/images/uploads/image211.jpg" ><img src="/images/uploads/image2-1.jpg" alt=""></a>
+                                        <?php foreach ($this->movie->media as $media): ?>
+                                            <a class="img-lightbox" data-fancybox-group="gallery" href="<?=$media->url ?>"><img src="<?=$media->thumb ?>" alt=""></a>
+                                        <?php endforeach; ?>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

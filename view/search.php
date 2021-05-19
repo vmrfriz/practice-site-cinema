@@ -39,8 +39,10 @@
                         <h6><a href="/movie/<?=$movie->id ?>"><?=$movie->name ?> <span>(<?=date('Y', strtotime($movie->release_date)) ?>)</span></a></h6>
                         <p class="describe"><?=$movie->short_description ?></p>
                         <p class="run-time"> Run Time: <?=$movie->duration ?> min. <span>Release: <?=$movie->release_date ?></span></p>
-                        <p>Director: <a href="/director/<?=urlencode(strtolower($movie->director)) ?>"><?=$movie->director ?></a></p>
-                        <p>Stars: </p>
+                        <p>Director: <a href="/director/<?=urlencode(strtolower($movie->director->id)) ?>"><?=$movie->director->name ?></a></p>
+                        <?php if ($movie->actors): ?>
+                        <p>Stars: <?=$movie->actors ?></p>
+                        <?php endif ?>
                     </div>
                 </div>
                 <?php endforeach ?>
@@ -62,7 +64,7 @@
                             <div class="row">
                                 <div class="col-md-12 form-it">
                                     <label>Movie name</label>
-                                    <input type="text" placeholder="Enter keywords">
+                                    <input type="text" value="<?=$_GET['q'] ?: ''?>" placeholder="Enter keywords">
                                 </div>
                                 <div class="col-md-12 form-it">
                                     <label>Genres & Subgenres</label>
