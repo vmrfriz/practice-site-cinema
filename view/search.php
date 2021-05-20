@@ -17,20 +17,8 @@
     <div class="container">
         <div class="row ipad-width2">
             <div class="col-md-8 col-sm-12 col-xs-12">
-                <div class="topbar-filter">
-                    <p>Found <span>1,608 movies</span> in total</p>
-                    <label>Sort by:</label>
-                    <select>
-                        <option value="popularity">Popularity Descending</option>
-                        <option value="popularity">Popularity Ascending</option>
-                        <option value="rating">Rating Descending</option>
-                        <option value="rating">Rating Ascending</option>
-                        <option value="date">Release date Descending</option>
-                        <option value="date">Release date Ascending</option>
-                    </select>
-                    <a href="movielist.html" class="list"><i class="ion-ios-list-outline active"></i></a>
-                    <a href="moviegrid.html" class="grid"><i class="ion-grid"></i></a>
-                </div>
+
+                <?php include 'includes/search-topbar.php' ?>
 
                 <?php foreach ($this->movies as $movie): ?>
                 <div class="movie-item-style-2">
@@ -39,7 +27,7 @@
                         <h6><a href="/movie/<?=$movie->id ?>"><?=$movie->name ?> <span>(<?=date('Y', strtotime($movie->release_date)) ?>)</span></a></h6>
                         <p class="describe"><?=$movie->short_description ?></p>
                         <p class="run-time"> Run Time: <?=$movie->duration ?> min. <span>Release: <?=$movie->release_date ?></span></p>
-                        <p>Director: <a href="/director/<?=urlencode(strtolower($movie->director->id)) ?>"><?=$movie->director->name ?></a></p>
+                        <p>Director: <a href="/movies/?director=<?=$movie->director->id ?>"><?=$movie->director->name ?></a></p>
                         <?php if ($movie->actors): ?>
                         <p>Stars: <?=$movie->actors ?></p>
                         <?php endif ?>
@@ -47,14 +35,8 @@
                 </div>
                 <?php endforeach ?>
 
-                <div class="topbar-filter">
-                    <div class="pagination2">
-                        <span>Page 1 of 2:</span>
-                        <a class="active" href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#"><i class="ion-arrow-right-b"></i></a>
-                    </div>
-                </div>
+                <?php include 'includes/search-topbar.php' ?>
+
             </div>
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="sidebar">
