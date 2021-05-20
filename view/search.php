@@ -60,26 +60,25 @@
                 <div class="sidebar">
                     <div class="searh-form">
                         <h4 class="sb-title">Search for movie</h4>
-                        <form class="form-style-1" action="#">
+                        <form class="form-style-1" action="/movies/">
                             <div class="row">
                                 <div class="col-md-12 form-it">
                                     <label>Movie name</label>
-                                    <input type="text" value="<?=$_GET['q'] ?: ''?>" placeholder="Enter keywords">
+                                    <input type="text" name="q" value="<?=$_GET['q'] ?: ''?>" placeholder="Enter keywords">
                                 </div>
+                                <?php if ($this->genres): ?>
                                 <div class="col-md-12 form-it">
                                     <label>Genres & Subgenres</label>
                                     <div class="group-ip">
-                                        <select name="skills" multiple="" class="ui fluid dropdown">
-                                            <option value="">Enter to filter genres</option>
-                                            <option value="Action1">Action 1</option>
-                                            <option value="Action2">Action 2</option>
-                                            <option value="Action3">Action 3</option>
-                                            <option value="Action4">Action 4</option>
-                                            <option value="Action5">Action 5</option>
+                                        <select name="genres[]" multiple="" class="ui fluid dropdown">
+                                            <option value=""></option>
+                                            <?php foreach ($this->genres as $genre): ?>
+                                            <option value="<?=$genre->id ?>" <?php if (in_array($genre->id, $_GET['genres'] ?? [])) echo 'selected="selected"' ?>><?=$genre->title ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
-
                                 </div>
+                                <?php endif; ?>
                                 <div class="col-md-12 ">
                                     <input class="submit" type="submit" value="submit">
                                 </div>
