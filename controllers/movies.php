@@ -1,6 +1,6 @@
 <?php
 
-$limit = $_GET['limit'] ? intval($_GET['limit']) : 1;
+$limit = $_GET['limit'] ? intval($_GET['limit']) : 10;
 $offset = $_GET['page'] ? intval($_GET['page'])-1 : 0;
 
 
@@ -81,4 +81,4 @@ $genres = Genre::getAll();
 $pages_count = ceil($movies_count / $limit);
 $current_page = $offset + 1;
 
-new View('search', compact('movies', 'genres', 'movies_count', 'current_page', 'pages_count'));
+new View('search', true, compact('movies', 'genres', 'movies_count', 'current_page', 'pages_count'));

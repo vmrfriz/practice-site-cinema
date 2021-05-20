@@ -19,4 +19,4 @@ $movie->media = Media::getFilmMedia($movie->id);
 
 
 
-new View('single', compact('movie', 'genres'));
+new View('single', true, compact('movie', 'genres'));
