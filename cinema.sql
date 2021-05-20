@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 20 2021 г., 01:57
+-- Время создания: Май 21 2021 г., 02:18
 -- Версия сервера: 10.4.12-MariaDB
 -- Версия PHP: 7.2.29
 
@@ -35,8 +35,8 @@ CREATE TABLE `films` (
   `release_date` date NOT NULL,
   `director_id` int(10) UNSIGNED NOT NULL,
   `duration` int(10) UNSIGNED NOT NULL,
-  `trailer_url` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL
+  `trailer_url` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -89,7 +89,31 @@ INSERT INTO `films_genres` (`film_id`, `genre_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
-(2, 4);
+(2, 4),
+(3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `films_reservations`
+--
+
+CREATE TABLE `films_reservations` (
+  `film_id` int(10) UNSIGNED NOT NULL,
+  `row` int(10) UNSIGNED NOT NULL,
+  `seat` int(10) UNSIGNED NOT NULL,
+  `phone` varchar(14) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `films_reservations`
+--
+
+INSERT INTO `films_reservations` (`film_id`, `row`, `seat`, `phone`) VALUES
+(1, 1, 14, '+79178803550'),
+(1, 1, 15, '+79178803550'),
+(1, 1, 18, '+79178803550'),
+(1, 2, 17, '+79178803550');
 
 -- --------------------------------------------------------
 
@@ -121,7 +145,7 @@ INSERT INTO `genres` (`id`, `title`) VALUES
 CREATE TABLE `humans` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(64) NOT NULL,
-  `photo` varchar(255) NOT NULL
+  `photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -223,6 +247,12 @@ ALTER TABLE `films_genres`
   ADD KEY `genre_id` (`genre_id`);
 
 --
+-- Индексы таблицы `films_reservations`
+--
+ALTER TABLE `films_reservations`
+  ADD UNIQUE KEY `film_position` (`film_id`,`row`,`seat`) USING BTREE;
+
+--
 -- Индексы таблицы `genres`
 --
 ALTER TABLE `genres`
@@ -304,6 +334,12 @@ ALTER TABLE `films_actors`
 ALTER TABLE `films_genres`
   ADD CONSTRAINT `films_genres_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `films_genres_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `films_reservations`
+--
+ALTER TABLE `films_reservations`
+  ADD CONSTRAINT `films_reservations_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `media`
