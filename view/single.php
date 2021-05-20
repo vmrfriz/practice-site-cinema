@@ -49,7 +49,7 @@
                                         <div class="col-md-8 col-sm-12 col-xs-12">
                                             <p><?=$this->movie->description ?></p>
 
-                                            <?php if ($this->movie->media): ?>
+                                            <?php if (count($this->movie->media)): ?>
                                             <div class="title-hd-sm">
                                                 <h4>Videos & Photos</h4>
                                             </div>
@@ -64,12 +64,22 @@
                                         <div class="col-md-4 col-xs-12 col-sm-12">
                                             <div class="sb-it">
                                                 <h6>Director: </h6>
-                                                <p><a href="/director/<?=$this->movie->director->id ?>"><?=$this->movie->director->name ?></a></p>
+                                                <p><a href="/movies/?director=<?=$this->movie->director->id ?>"><?=$this->movie->director->name ?></a></p>
                                             </div>
-                                            <?php if ($this->genres): ?>
+                                            <?php if ($genres = $this->movie->getGenres()): ?>
                                             <div class="sb-it">
                                                 <h6>Genres:</h6>
-                                                <p><?=$this->genres ?></p>
+                                                <p>
+                                                <?php
+                                                    $first = true;
+                                                    $genres_text = '';
+                                                    foreach ($genres as $genre) {
+                                                        $genres_text .= ($first ? '': ', ') . '<a href="/movies/?genres[]='.$genre['id'].'">'.$genre['title'].'</a>';
+                                                        $first = false;
+                                                    }
+                                                    echo $genres_text;
+                                                ?>
+                                                </p>
                                             </div>
                                             <?php endif; ?>
                                             <div class="sb-it">
@@ -93,7 +103,7 @@
                                             <div class="cast-it">
                                                 <div class="cast-left">
                                                     <h4><?=$this->movie->director->getInitials() ?></h4>
-                                                    <a href="/director/<?=urlencode(strtolower($this->movie->director->id))?>"><?=$this->movie->director->name ?></a>
+                                                    <a href="/movies/?director=<?=$this->movie->director->id ?>"><?=$this->movie->director->name ?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +123,7 @@
                                                     <?php else: ?>
                                                     <h4><?=$actor->getInitials() ?></h4>
                                                     <?php endif; ?>
-                                                    <a href="#"><?=$actor->name ?></a>
+                                                    <a href="/movies/?actor=<?=$actor->id ?>"><?=$actor->name ?></a>
                                                 </div>
                                             </div>
                                             <?php endforeach; ?>
