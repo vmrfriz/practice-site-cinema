@@ -21,7 +21,7 @@ class Movie
         $db_result = \Database::getConnection()->query($sql);
 
         if (!$db_result->num_rows) {
-            throw new \Exceptions\MovieNotFound();
+            return false;
         }
 
         $data = $db_result->fetch_assoc();

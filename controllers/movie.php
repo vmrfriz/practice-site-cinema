@@ -2,9 +2,8 @@
 
 $id = Router::getNext();
 
-try {
-    $movie = Movie::getById($id);
-} catch (\Exceptions\MovieNotFound $e) {
+$movie = Movie::getById($id);
+if (!$movie) {
     http_response_code(404);
     include $_SERVER['DOCUMENT_ROOT'] . '/404.html';
     return;
