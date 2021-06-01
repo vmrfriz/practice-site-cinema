@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 21 2021 г., 02:18
+-- Время создания: Июн 02 2021 г., 00:58
 -- Версия сервера: 10.4.12-MariaDB
--- Версия PHP: 7.2.29
+-- Версия PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,9 +66,7 @@ CREATE TABLE `films_actors` (
 INSERT INTO `films_actors` (`film_id`, `human_id`) VALUES
 (1, 1),
 (1, 2),
-(2, 3),
-(2, 4),
-(2, 5);
+(2, 7);
 
 -- --------------------------------------------------------
 
@@ -89,31 +87,7 @@ INSERT INTO `films_genres` (`film_id`, `genre_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
-(2, 4),
 (3, 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `films_reservations`
---
-
-CREATE TABLE `films_reservations` (
-  `film_id` int(10) UNSIGNED NOT NULL,
-  `row` int(10) UNSIGNED NOT NULL,
-  `seat` int(10) UNSIGNED NOT NULL,
-  `phone` varchar(14) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `films_reservations`
---
-
-INSERT INTO `films_reservations` (`film_id`, `row`, `seat`, `phone`) VALUES
-(1, 1, 14, '+79178803550'),
-(1, 1, 15, '+79178803550'),
-(1, 1, 18, '+79178803550'),
-(1, 2, 17, '+79178803550');
 
 -- --------------------------------------------------------
 
@@ -164,42 +138,44 @@ INSERT INTO `humans` (`id`, `name`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `media`
+-- Структура таблицы `sessions`
 --
 
-CREATE TABLE `media` (
+CREATE TABLE `sessions` (
   `id` int(10) UNSIGNED NOT NULL,
   `film_id` int(10) UNSIGNED NOT NULL,
-  `url` varchar(255) NOT NULL,
-  `thumb` varchar(64) NOT NULL
+  `started_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `media`
+-- Дамп данных таблицы `sessions`
 --
 
-INSERT INTO `media` (`id`, `film_id`, `url`, `thumb`) VALUES
-(1, 1, '/images/uploads/image11.jpg', '/images/uploads/image1.jpg'),
-(2, 1, '/images/uploads/image21.jpg', '/images/uploads/image2.jpg'),
-(3, 1, '/images/uploads/image31.jpg', '/images/uploads/image3.jpg'),
-(4, 1, '/images/uploads/image41.jpg', '/images/uploads/image4.jpg'),
-(5, 1, '/images/uploads/image51.jpg', '/images/uploads/image5.jpg'),
-(6, 1, '/images/uploads/image61.jpg', '/images/uploads/image6.jpg'),
-(7, 1, '/images/uploads/image71.jpg', '/images/uploads/image7.jpg'),
-(8, 1, '/images/uploads/image81.jpg', '/images/uploads/image8.jpg'),
-(9, 1, '/images/uploads/image91.jpg', '/images/uploads/image9.jpg'),
-(10, 1, '/images/uploads/image101.jpg', '/images/uploads/image10.jpg'),
-(11, 1, '/images/uploads/image111.jpg', '/images/uploads/image1-1.jpg'),
-(12, 1, '/images/uploads/image121.jpg', '/images/uploads/image12.jpg'),
-(13, 1, '/images/uploads/image131.jpg', '/images/uploads/image13.jpg'),
-(14, 1, '/images/uploads/image141.jpg', '/images/uploads/image14.jpg'),
-(15, 1, '/images/uploads/image151.jpg', '/images/uploads/image15.jpg'),
-(16, 1, '/images/uploads/image161.jpg', '/images/uploads/image16.jpg'),
-(17, 1, '/images/uploads/image171.jpg', '/images/uploads/image17.jpg'),
-(18, 1, '/images/uploads/image181.jpg', '/images/uploads/image18.jpg'),
-(19, 1, '/images/uploads/image191.jpg', '/images/uploads/image19.jpg'),
-(20, 1, '/images/uploads/image201.jpg', '/images/uploads/image20.jpg'),
-(21, 1, '/images/uploads/image211.jpg', '/images/uploads/image2-1.jpg');
+INSERT INTO `sessions` (`id`, `film_id`, `started_at`) VALUES
+(1, 3, '2021-06-01 12:15:00');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `sessions_reservations`
+--
+
+CREATE TABLE `sessions_reservations` (
+  `session_id` int(10) UNSIGNED NOT NULL,
+  `row` int(10) UNSIGNED NOT NULL,
+  `seat` int(10) UNSIGNED NOT NULL,
+  `phone` varchar(14) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `sessions_reservations`
+--
+
+INSERT INTO `sessions_reservations` (`session_id`, `row`, `seat`, `phone`) VALUES
+(1, 1, 14, '+79178803550'),
+(1, 1, 15, '+79178803550'),
+(1, 1, 18, '+79178803550'),
+(1, 2, 17, '+79178803550');
 
 -- --------------------------------------------------------
 
@@ -247,12 +223,6 @@ ALTER TABLE `films_genres`
   ADD KEY `genre_id` (`genre_id`);
 
 --
--- Индексы таблицы `films_reservations`
---
-ALTER TABLE `films_reservations`
-  ADD UNIQUE KEY `film_position` (`film_id`,`row`,`seat`) USING BTREE;
-
---
 -- Индексы таблицы `genres`
 --
 ALTER TABLE `genres`
@@ -265,11 +235,17 @@ ALTER TABLE `humans`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `media`
+-- Индексы таблицы `sessions`
 --
-ALTER TABLE `media`
+ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `film_id` (`film_id`);
+  ADD UNIQUE KEY `unique_session` (`film_id`,`started_at`);
+
+--
+-- Индексы таблицы `sessions_reservations`
+--
+ALTER TABLE `sessions_reservations`
+  ADD UNIQUE KEY `film_position` (`session_id`,`row`,`seat`) USING BTREE;
 
 --
 -- Индексы таблицы `users`
@@ -300,10 +276,10 @@ ALTER TABLE `humans`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT для таблицы `media`
+-- AUTO_INCREMENT для таблицы `sessions`
 --
-ALTER TABLE `media`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ALTER TABLE `sessions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -336,16 +312,16 @@ ALTER TABLE `films_genres`
   ADD CONSTRAINT `films_genres_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `films_reservations`
+-- Ограничения внешнего ключа таблицы `sessions`
 --
-ALTER TABLE `films_reservations`
-  ADD CONSTRAINT `films_reservations_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `media`
+-- Ограничения внешнего ключа таблицы `sessions_reservations`
 --
-ALTER TABLE `media`
-  ADD CONSTRAINT `media_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sessions_reservations`
+  ADD CONSTRAINT `sessions_reservations_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
