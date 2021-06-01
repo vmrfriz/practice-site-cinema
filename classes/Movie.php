@@ -73,14 +73,6 @@ class Movie
         return $data ? $data->fetch_all(MYSQLI_ASSOC) : [];
     }
 
-    public function getMedia(): array {
-        $sql ='SELECT * FROM `media` WHERE `film_id` = ' . $this->id;
-
-        $data = \Database::getConnection()->query($sql);
-
-        return $data ? $data->fetch_all(MYSQLI_ASSOC) : [];
-    }
-
     public function getDirector(): Human {
         return Human::getById($this->director_id);
     }

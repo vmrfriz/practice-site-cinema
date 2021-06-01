@@ -34,27 +34,12 @@
                             <ul class="tab-links tabs-mv">
                                 <li class="active"><a href="#overview">Огляд</a></li>
                                 <li><a href="#cast">  Скдал та актори </a></li>
-                                <?php if ($this->movie->media): ?>
-                                <li><a href="#media"> Медіа</a></li>
-                                <?php endif; ?>
                             </ul>
                             <div class="tab-content">
                                 <div id="overview" class="tab active">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-12 col-xs-12">
                                             <p><?=$this->movie->description ?></p>
-
-                                            <?php if (count($this->movie->media)): ?>
-                                            <div class="title-hd-sm">
-                                                <h4>Видео та фото</h4>
-                                            </div>
-                                            <div class="mvsingle-item ov-item">
-                                                <?php $i = 0; ?>
-                                                <?php foreach ($this->movie->media as $media): if ($i++ < 4): ?>
-                                                <a class="img-lightbox"  data-fancybox-group="gallery" href="<?=$media->url ?>" ><img src="<?=$media->thumb ?>" alt=""></a>
-                                                <?php endif; endforeach ?>
-                                            </div>
-                                            <?php endif; ?>
                                         </div>
                                         <div class="col-md-4 col-xs-12 col-sm-12">
                                             <div class="sb-it">
@@ -126,20 +111,6 @@
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                                <?php if ($this->movie->media): ?>
-                                <div id="media" class="tab">
-                                    <div class="row">
-                                        <div class="title-hd-sm">
-                                            <h4>Фото <span> (21)</span></h4>
-                                        </div>
-                                        <div class="mvsingle-item">
-                                        <?php foreach ($this->movie->media as $media): ?>
-                                            <a class="img-lightbox" data-fancybox-group="gallery" href="<?=$media->url ?>"><img src="<?=$media->thumb ?>" alt=""></a>
-                                        <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
