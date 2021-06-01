@@ -32,6 +32,7 @@
             </div>
             <ul>
                 <li><a class="nav" href="?layouts=movies">Фильмы</a></li>
+                <li><a class="nav" href="?layouts=sessions">Сеансы</a></li>
                 <li><a class="nav" href="?layouts=genres">Жанры</a></li>
                 <li><a class="nav" href="?layouts=humans">Люди</a></li>
 <!--                <li><a class="nav" href="?layouts=settings">Основные</a></li>-->
@@ -56,6 +57,15 @@
                             break;
                         case 'add_movie':
                             include $_SERVER["DOCUMENT_ROOT"] . '/admin/module/add/add_movie.php';
+                            break;
+                        case 'sessions':
+                            include $_SERVER["DOCUMENT_ROOT"] . '/admin/layouts/sessions.php';
+                            break;
+                        case 'edit_session':
+                            include $_SERVER["DOCUMENT_ROOT"] . '/admin/module/edit/edit_session.php';
+                            break;
+                        case 'add_session':
+                            include $_SERVER["DOCUMENT_ROOT"] . '/admin/module/add/add_session.php';
                             break;
                         case 'genres':
                             include $_SERVER["DOCUMENT_ROOT"] . '/admin/layouts/genres.php';
