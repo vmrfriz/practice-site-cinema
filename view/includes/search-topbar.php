@@ -1,9 +1,9 @@
 <div class="topbar-filter">
-    <p>Found <span><?=number_format($this->movies_count, 0, '.', ' ') ?> <?=($this->movies_count <= 1 ? 'movie' : 'movies') ?></span> in total</p>
+    <p>Шукати <span><?=number_format($this->movies_count, 0, '.', ' ') ?> <?=($this->movies_count <= 1 ? 'movie' : 'movies') ?></span> всього</p>
 
     <div class="pagination2">
 
-    <span>Page <?=$this->current_page ?> of <?=$this->pages_count ?>:</span>
+    <span>Сторінка <?=$this->current_page ?> of <?=$this->pages_count ?>:</span>
 
     <?php if ($this->current_page > 1): ?>
         <?php

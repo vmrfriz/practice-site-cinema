@@ -15,12 +15,12 @@
                     <div class="movie-btn">
                         <?php if ($this->movie->trailer_url): ?>
                         <div class="btn-transform transform-vertical red">
-                            <div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
+                            <div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Дивитись треллер</a></div>
                             <div><a href="<?=$this->movie->trailer_url ?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
                         </div>
                         <?php endif; ?>
                         <div class="btn-transform transform-vertical">
-                            <div><a href="/select/<?=$this->movie->id ?>" class="item item-1 yellowbtn"> <i class="ion-card"></i> Buy ticket</a></div>
+                            <div><a href="/select/<?=$this->movie->id ?>" class="item item-1 yellowbtn"> <i class="ion-card"></i> Бронювати квиток</a></div>
                             <div><a href="/select/<?=$this->movie->id ?>" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
                         </div>
                     </div>
@@ -32,10 +32,10 @@
                     <div class="movie-tabs">
                         <div class="tabs">
                             <ul class="tab-links tabs-mv">
-                                <li class="active"><a href="#overview">Overview</a></li>
-                                <li><a href="#cast">  Cast & Crew </a></li>
+                                <li class="active"><a href="#overview">Огляд</a></li>
+                                <li><a href="#cast">  Скдал та актори </a></li>
                                 <?php if ($this->movie->media): ?>
-                                <li><a href="#media"> Media</a></li>
+                                <li><a href="#media"> Медіа</a></li>
                                 <?php endif; ?>
                             </ul>
                             <div class="tab-content">
@@ -46,7 +46,7 @@
 
                                             <?php if (count($this->movie->media)): ?>
                                             <div class="title-hd-sm">
-                                                <h4>Videos & Photos</h4>
+                                                <h4>Видео та фото</h4>
                                             </div>
                                             <div class="mvsingle-item ov-item">
                                                 <?php $i = 0; ?>
@@ -58,12 +58,12 @@
                                         </div>
                                         <div class="col-md-4 col-xs-12 col-sm-12">
                                             <div class="sb-it">
-                                                <h6>Director: </h6>
+                                                <h6>Директор: </h6>
                                                 <p><a href="/movies/?director=<?=$this->movie->director->id ?>"><?=$this->movie->director->name ?></a></p>
                                             </div>
                                             <?php if ($genres = $this->movie->getGenres()): ?>
                                             <div class="sb-it">
-                                                <h6>Genres:</h6>
+                                                <h6>Жанри:</h6>
                                                 <p>
                                                 <?php
                                                     $first = true;
@@ -78,11 +78,11 @@
                                             </div>
                                             <?php endif; ?>
                                             <div class="sb-it">
-                                                <h6>Release Date:</h6>
+                                                <h6>Дата виходу:</h6>
                                                 <p><?=$this->movie->release_date ?></p>
                                             </div>
                                             <div class="sb-it">
-                                                <h6>Run Time:</h6>
+                                                <h6>Тривалість:</h6>
                                                 <p><?=$this->movie->duration ?> min</p>
                                             </div>
                                         </div>
@@ -92,7 +92,7 @@
                                     <div class="row">
                                         <?php if ($this->movie->director): ?>
                                         <div class="title-hd-sm">
-                                            <h4>Directors & Credit Writers</h4>
+                                            <h4>Автори та продюсери</h4>
                                         </div>
                                         <div class="mvcast-item">
                                             <div class="cast-it">
@@ -107,7 +107,7 @@
 
                                         <?php if ($this->movie->actors): ?>
                                         <div class="title-hd-sm">
-                                            <h4>Cast</h4>
+                                            <h4>Склад команди</h4>
                                         </div>
                                         <div class="mvcast-item">
                                             <?php foreach ($this->movie->actors as $actor): ?>
@@ -130,7 +130,7 @@
                                 <div id="media" class="tab">
                                     <div class="row">
                                         <div class="title-hd-sm">
-                                            <h4>Photos <span> (21)</span></h4>
+                                            <h4>Фото <span> (21)</span></h4>
                                         </div>
                                         <div class="mvsingle-item">
                                         <?php foreach ($this->movie->media as $media): ?>

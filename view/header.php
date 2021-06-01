@@ -64,44 +64,26 @@
                         </li>
                         <li class="dropdown first">
                             <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
-                            Home <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            Головна 
                             </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="index-2.html">Home 01</a></li>
-                                <li><a href="homev2.html">Home 02</a></li>
-                                <li><a href="homev3.html">Home 03</a></li>
-                            </ul>
                         </li>
-                        <li class="dropdown first">
+                        <li>
                             <a href="/movies/" class="btn btn-default lv1">
-                                movies
+                                Фільми
                             </a>
                         </li>
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                            celebrities <i class="fa fa-angle-down" aria-hidden="true"></i>
+			<li>
+                            <a href="/about/" class="btn btn-default lv1">
+                                Про Нас
                             </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="celebritygrid01.html">celebrity grid 01</a></li>
-                                <li><a href="celebritygrid02.html">celebrity grid 02 </a></li>
-                                <li><a href="celebritylist.html">celebrity list</a></li>
-                                <li class="it-last"><a href="celebritysingle.html">celebrity single</a></li>
-                            </ul>
+                        </li>
+			<li>
+                            <a href="/contacts/" class="btn btn-default lv1">
+                                Контакти
+                            </a>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav flex-child-menu menu-right">
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                            pages <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="landing.html">Landing</a></li>
-                                <li><a href="404.html">404 Page</a></li>
-                                <li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Help</a></li>
-                    </ul>
+
                 </div>
             <!-- /.navbar-collapse -->
         </nav>
@@ -109,7 +91,7 @@
         <!-- top search form -->
         <form action="/movies/">
             <div class="top-search">
-                <input type="text" name="q" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
+                <input type="text" name="q" placeholder="Шукати фільм...">
             </div>
         </form>
     </div>

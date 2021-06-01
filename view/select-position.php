@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронирование мест на фильм <?=$this->movie->name ?></title>
+    <title>Бронювання місць на фільм <?=$this->movie->name ?></title>
 
     <link rel="stylesheet" href="/css/select-position.css">
 </head>
 <body>
-    <h2 class="text-center">Выбор мест</h2>
+    <h2 class="text-center">Вибір місць</h2>
     <div class="hall-container">
 
         <div class="hall-screen">[экран] <?=$this->movie->name ?></div>
@@ -38,16 +38,16 @@
     </div>
 
 
-    <h2 class="text-center">Бронирование мест</h2>
+    <h2 class="text-center">Бронювання місць</h2>
 
     <div class="order-container">
-        <p>Выбраны следующие места:</p>
+        <p>Обрані наступні місця:</p>
         <ul id="positions"></ul>
         <form action="/order/<?=$this->movie->id ?>" method="POST">
             <input type="hidden" id="order" name="order" value="">
             <p>Ваш телефон: <input type="tel" name="phone" class="phone" value="" maxlength="13" placeholder="+380951234567" required="required">
             </p>
-            <button type="submit" id="reserve-btn" class="btn" disabled="disabled">Забронировать</button>
+            <button type="submit" id="reserve-btn" class="btn" disabled="disabled">Забронювати</button>
         </form>
     </div>
 

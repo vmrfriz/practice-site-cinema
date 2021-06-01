@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="hero-ct">
-                    <h1> movie listing - list</h1>
+                    <h1> Список фільмів</h1>
                     <ul class="breadcumb">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+                        <li class="active"><a href="/">Головна</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> Список фільмів</li>
                     </ul>
                 </div>
             </div>
@@ -41,16 +41,16 @@
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="sidebar">
                     <div class="searh-form">
-                        <h4 class="sb-title">Search for movie</h4>
+                        <h4 class="sb-title">Шукати за фільмом</h4>
                         <form class="form-style-1" action="/movies/">
                             <div class="row">
                                 <div class="col-md-12 form-it">
-                                    <label>Movie name</label>
+                                    <label>Назва фільму</label>
                                     <input type="text" name="q" value="<?=$_GET['q'] ?: ''?>" placeholder="Enter keywords">
                                 </div>
                                 <?php if ($this->genres): ?>
                                 <div class="col-md-12 form-it">
-                                    <label>Genres & Subgenres</label>
+                                    <label>Жарнр</label>
                                     <div class="group-ip">
                                         <select name="genres[]" multiple="" class="ui fluid dropdown">
                                             <option value=""></option>

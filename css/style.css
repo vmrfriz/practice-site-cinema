@@ -4101,6 +4101,7 @@ ul {
 }
 .movie-items .movie-item img {
   width: 100%;
+  height: 400px;
   -webkit-transition: all 0.5s ease-out;
   -moz-transition: all 0.5s ease-out;
   -o-transition: all 0.5s ease-out;
@@ -7062,6 +7063,7 @@ p.ceb-single {
 }
 .slider .movie-item {
   margin-right: 15px;
+  height: 400px;
 }
 .slider .movie-item .title-in {
   margin-bottom: 45px;
