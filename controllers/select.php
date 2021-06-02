@@ -1,10 +1,12 @@
 <?php
 
-$film_id = intval(Router::getNext());
-$movie = Movie::getById($film_id);
+$session_id = intval(Router::getNext());
+$current_session = MovieSession::getById($session_id);
+if (!$current_session) header('Location: ' . $_SERVER['HTTP_REFERER']);
+$movie = $current_session->getMovie();
 if (!$movie) header('Location: ' . $_SERVER['HTTP_REFERER']);
-
-$reservations_object = Reservation::getByFilmId($movie->id);
+$sessions = $movie->getSessions();
+$reservations_object = Reservation::getByFilmId($session_id);
 
 $reservations = [];
 foreach ($reservations_object as $reserv) {
@@ -13,4 +15,4 @@ foreach ($reservations_object as $reserv) {
     $reservations[$reserv->row][] = $reserv->seat;
 }
 
-new View('select-position', false, compact('movie', 'reservations'));
+new View('select-position', false, compact('movie', 'reservations', 'current_session', 'sessions'));

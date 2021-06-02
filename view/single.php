@@ -19,10 +19,12 @@
                             <div><a href="<?=$this->movie->trailer_url ?>" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
                         </div>
                         <?php endif; ?>
+                        <?php if (count($sessions = $this->movie->getSessions())): ?>
                         <div class="btn-transform transform-vertical">
-                            <div><a href="/select/<?=$this->movie->id ?>" class="item item-1 yellowbtn"> <i class="ion-card"></i> Бронювати квиток</a></div>
-                            <div><a href="/select/<?=$this->movie->id ?>" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
+                            <div><a href="/select/<?=$sessions[0]->id ?>" class="item item-1 yellowbtn"> <i class="ion-card"></i> Бронювати квиток</a></div>
+                            <div><a href="/select/<?=$sessions[0]->id ?>" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

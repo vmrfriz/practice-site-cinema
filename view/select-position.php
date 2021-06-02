@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +9,28 @@
     <link rel="stylesheet" href="/css/select-position.css">
 </head>
 <body>
-    <h2 class="text-center">Вибір місць</h2>
+    <h2 class="text-center">Бронювання квитків</h2>
     <div class="hall-container">
 
-        <div class="hall-screen">[экран] <?=$this->movie->name ?></div>
+        <form action="/order/<?=$this->session->id ?>" id="reservation" method="POST">
+            <input type="hidden" id="order" name="order" value="">
+            <p>Фільм: <?=$this->movie->name ?></p>
+            <p>
+                Сеанс:
+                <select name="session_id" id="session_id">
+                <?php foreach ($this->sessions as $session): ?>
+                    <option value="<?=$session->id ?>" <?=($session == $this->current_session ? 'selected="selected"' : '')?>><?=date('d.m.Y H:i', $session->started_at) ?></option>
+                <?php endforeach; ?>
+                </select>
+            </p>
+            <div>
+                Місця:
+                <ul id="positions" class="session-ul"></ul>
+            </div>
+            <p>Ваш телефон: <input type="tel" name="phone" class="phone" value="" maxlength="13" placeholder="+380951234567" required="required">
+        </form>
+
+        <div class="hall-screen">[екран]</div>
 
         <div class="hall-seats-container">
         <?php for ($i = 1; $i < 10; $i++): ?>
@@ -37,18 +55,8 @@
 
     </div>
 
-
-    <h2 class="text-center">Бронювання місць</h2>
-
     <div class="order-container">
-        <p>Обрані наступні місця:</p>
-        <ul id="positions"></ul>
-        <form action="/order/<?=$this->movie->id ?>" method="POST">
-            <input type="hidden" id="order" name="order" value="">
-            <p>Ваш телефон: <input type="tel" name="phone" class="phone" value="" maxlength="13" placeholder="+380951234567" required="required">
-            </p>
-            <button type="submit" id="reserve-btn" class="btn" disabled="disabled">Забронювати</button>
-        </form>
+        <button type="submit" form="reservation" id="reserve-btn" class="btn" disabled="disabled">Забронювати</button>
     </div>
 
     <script src="/js/select-position.js"></script>

@@ -3,10 +3,14 @@
     var order = d.querySelector('#order');
     var orderBtn = d.querySelector('#reserve-btn');
 
+    d.querySelector('#session_id').addEventListener('change', function () {
+        window.location.pathname = '/select/' + this.value;
+    });
+
     let updatePositionsView = function (checked) {
         let positions = '';
         for (let c in checked) {
-            positions += '<li>' + checked[c].row + ' ряд ' + checked[c].seat + ' место</li>';
+            positions += '<li>' + checked[c].row + ' ряд ' + checked[c].seat + ' місце</li>';
         }
         d.querySelector('#positions').innerHTML = positions;
     };
@@ -30,7 +34,7 @@
             this.classList.remove('active');
         } else {
             if (checked.length >= 4) {
-                alert('Вы не можете забронировать более 4 мест');
+                alert('Ви не можете забронювати більше 4 місць');
                 return;
             }
             checked.push({row, seat});

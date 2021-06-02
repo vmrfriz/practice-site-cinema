@@ -104,6 +104,20 @@ body {
     margin: 10px auto;
 }
 
-ul {
+.session-ul {
     padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.session-ul li {
+    display: inline;
+}
+
+.session-ul li:not(:last-child)::after {
+    content: ', ';
+}
+
+.session-ul {
+    display: inline-block;
 }
