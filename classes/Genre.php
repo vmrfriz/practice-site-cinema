@@ -14,7 +14,7 @@ class Genre
         $sql = 'SELECT * FROM `genres` WHERE `id`=' . $id;
         $db_result = Database::getConnection()->query($sql);
 
-        if (!$db_result || $db_result->num_rows) return false;
+        if (!$db_result || !$db_result->num_rows) return false;
 
         return new static($db_result->fetch_assoc());
     }

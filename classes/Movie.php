@@ -42,7 +42,7 @@ class Movie
     }
 
     public static function getLimit(int $limit, int $offset = 0): MovieCollection {
-        $sql = 'SELECT * FROM films OFFSET LIMIT ' . $limit . ' OFFSET ' . $offset;
+        $sql = 'SELECT * FROM films LIMIT ' . $limit . ' OFFSET ' . $offset;
         $data = Database::getConnection()->query($sql)->fetch_all(MYSQLI_ASSOC);
         $movies = new MovieCollection;
         foreach ($data as $movie) {
@@ -75,5 +75,15 @@ class Movie
 
     public function getDirector(): Human {
         return Human::getById($this->director_id);
+    }
+
+    public function getSessions() {
+        $sql = 'SELECT * FROM `sessions` WHERE film_id = ' . $this->id . ' AND DATE(started_at) > DATE(NOW())';
+        $data = Database::getConnection()->query($sql);
+        $sessions = new MovieSessionsCollection;
+        foreach ($data as $session) {
+            $sessions->add( new MovieSession($session) );
+        }
+        return $sessions;
     }
 }
