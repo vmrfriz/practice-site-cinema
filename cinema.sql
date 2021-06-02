@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 02 2021 г., 00:58
+-- Время создания: Июн 02 2021 г., 14:10
 -- Версия сервера: 10.4.12-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -46,7 +46,9 @@ CREATE TABLE `films` (
 INSERT INTO `films` (`id`, `name`, `description`, `poster`, `release_date`, `director_id`, `duration`, `trailer_url`, `created_at`) VALUES
 (1, 'Skyfall: Quantum of Spectre', 'Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth\'s mightiest heroes must come together once again to protect the world from global extinction.', '/images/uploads/movie-single.jpg', '2015-05-01', 6, 141, 'https://www.youtube.com/embed/o-0hcF97wy0', '2021-05-17 18:59:19'),
 (2, 'Marriage Story', 'Marriage Story is a 2019 British-American drama film written and directed by Noah Baumbach, who produced the film with David Heyman. It stars Scarlett Johansson and Adam Driver, with Laura Dern, Alan Alda, Ray Liotta, Julie Hagerty, and Merritt Wever in supporting roles. The film follows a married couple, an actress and a stage director (Johansson and Driver), going through a coast-to-coast divorce. ', '/images/uploads/MarriageStoryPoster.png', '2019-11-15', 7, 136, '', '2021-05-19 20:56:45'),
-(3, 'Форсаж 9', 'Доминик Торетто ведет спокойную жизнь вместе с Летти и своим сыном Брайаном, однако, они знают, что новая опасность всегда где-то рядом. В этот раз Доминику придется встретиться с призраками прошлого, если он хочет спасти самых близких. Команда снова собирается вместе, чтобы предотвратить дерзкий план по захвату мира, который придумал самый опасный преступник и безбашенный водитель из всех, с кем они сталкивались ранее. Ситуация усложняется тем, что этот человек — брат Доминика Джейкоб, которого много лет назад изгнали из семьи.', '/images/uploads/fast-and-furious.webp', '2021-05-19', 1, 145, '', '2021-05-19 20:02:52');
+(3, 'The Walk', 'Американский исторический фильм о французском канатоходце Филиппе Пети, снятый режиссёром Робертом Земекисом. В центре сюжета — предпринятый французом в 1974 году проход по канату, натянутому между Башнями-Близнецами Всемирного торгового центра. Роль Пети исполнил Джозеф Гордон-Левитт. Сценарий написан Земекисом в соавторстве с Кристофером Брауном и основан на книге Пети «Достать до облаков». В североамериканский прокат фильм вышел 30 сентября 2015 года.', '/images/uploads/mv-item4.jpg', '2015-10-15', 1, 123, 'https://www.youtube.com/watch?v=GR1EmTKAWIw', '2021-05-19 20:02:52'),
+(4, 'Oblivion', 'Американский фантастический боевик режиссёра Джозефа Косински по одноимённому неопубликованному графическому роману. В главных ролях — Том Круз, Ольга Куриленко, Андреа Райсборо, Морган Фримен, Мелисса Лео, Зои Белл и Николай Костер-Вальдау. Джозеф Косински написал сценарий, спродюсировал и выступил в качестве режиссёра фильма.', '/images/uploads/mv-it1.jpg', '2013-04-11', 5, 127, 'https://www.youtube.com/watch?v=dbEiZnBFSYk', '2021-06-02 11:01:03'),
+(5, 'The Forest', 'Сюжет разворачивается в лесу Аокигахара, реально существующем у Северо-Западного подножия горы Фудзияма в Японии. Сара Прайс (Натали Дормер), молодая американка, получает звонок из полиции Японии, в котором ей сообщают, что её сестра-близнец Джесс, работающая учительницей английского языка в токийской школе, пропала в лесу Аокигахара (который имеет нехорошую славу, поскольку в нём каждый год случаются десятки самоубийств). Поскольку с момента её исчезновения прошло уже несколько дней, полиция уверена, что Джесс уже мертва. Сара отказывается в это верить, так как, будучи её близнецом, она продолжает чувствовать её душу. Не обращая внимания на предостережение своего бойфренда Роба (Оуэн Маккен), девушка прилетает в Японию, дав слово, что вернётся через несколько дней.', '/images/uploads/mv-it5.jpg', '2016-01-14', 7, 95, 'https://www.youtube.com/watch?v=4-esgPQVhic', '2021-06-02 11:03:55');
 
 -- --------------------------------------------------------
 
@@ -66,7 +68,15 @@ CREATE TABLE `films_actors` (
 INSERT INTO `films_actors` (`film_id`, `human_id`) VALUES
 (1, 1),
 (1, 2),
-(2, 7);
+(2, 7),
+(3, 5),
+(3, 7),
+(4, 4),
+(4, 6),
+(4, 7),
+(5, 1),
+(5, 2),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -87,7 +97,12 @@ INSERT INTO `films_genres` (`film_id`, `genre_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
-(3, 1);
+(3, 1),
+(4, 1),
+(4, 2),
+(4, 3),
+(5, 3),
+(5, 4);
 
 -- --------------------------------------------------------
 
@@ -152,7 +167,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `film_id`, `started_at`) VALUES
-(1, 3, '2021-06-01 12:15:00');
+(1, 3, '2021-06-01 12:15:00'),
+(2, 3, '2021-06-03 12:10:00'),
+(3, 3, '2021-06-04 10:00:00');
 
 -- --------------------------------------------------------
 
@@ -175,7 +192,11 @@ INSERT INTO `sessions_reservations` (`session_id`, `row`, `seat`, `phone`) VALUE
 (1, 1, 14, '+79178803550'),
 (1, 1, 15, '+79178803550'),
 (1, 1, 18, '+79178803550'),
-(1, 2, 17, '+79178803550');
+(1, 2, 17, '+79178803550'),
+(3, 1, 1, '+79178803550'),
+(3, 1, 2, '+79178803550'),
+(3, 1, 3, '+79178803550'),
+(3, 1, 4, '+79178803550');
 
 -- --------------------------------------------------------
 
@@ -261,7 +282,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `films`
 --
 ALTER TABLE `films`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `genres`
@@ -279,7 +300,7 @@ ALTER TABLE `humans`
 -- AUTO_INCREMENT для таблицы `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
