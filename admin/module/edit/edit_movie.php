@@ -32,20 +32,24 @@
                 id = {$id};
         ");
 
-        array_walk($actors, 'intval');
-        $values = implode(', ', $actors) ?: '';
-        fetch($conn, "DELETE FROM films_actors WHERE film_id={$id} AND human_id NOT IN ({$values})");
-        if (count($actors)) {
-            $values = implode("), ({$id}, ", $actors) ?: '';
-            fetch($conn, "INSERT IGNORE INTO films_actors (film_id, human_id) VALUES ({$id}, {$values})");
+        if ($actors) {
+            array_walk($actors, 'intval');
+            $values = implode(', ', $actors) ?: '';
+            fetch($conn, "DELETE FROM films_actors WHERE film_id={$id} AND human_id NOT IN ({$values})");
+            if (count($actors)) {
+                $values = implode("), ({$id}, ", $actors) ?: '';
+                fetch($conn, "INSERT IGNORE INTO films_actors (film_id, human_id) VALUES ({$id}, {$values})");
+            }
         }
 
-        array_walk($genres, 'intval');
-        $values = implode(', ', $genres) ?: '';
-        fetch($conn, "DELETE FROM films_genres WHERE film_id={$id} AND genre_id NOT IN ({$values})");
-        if (count($genres)) {
-            $values = implode("), ({$id}, ", $genres) ?: '';
-            fetch($conn, "INSERT IGNORE INTO films_genres (film_id, genre_id) VALUES ({$id}, {$values})");
+        if ($genres) {
+            array_walk($genres, 'intval');
+            $values = implode(', ', $genres) ?: '';
+            fetch($conn, "DELETE FROM films_genres WHERE film_id={$id} AND genre_id NOT IN ({$values})");
+            if (count($genres)) {
+                $values = implode("), ({$id}, ", $genres) ?: '';
+                fetch($conn, "INSERT IGNORE INTO films_genres (film_id, genre_id) VALUES ({$id}, {$values})");
+            }
         }
 
         header("Location: ?layouts=movies");
