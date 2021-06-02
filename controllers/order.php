@@ -12,8 +12,6 @@ foreach ($reservations as $reserv) {
 }
 
 $sql = 'INSERT INTO `sessions_reservations` (`session_id`, `row`, `seat`, `phone`) VALUES ' . implode(', ', $values);
-echo '<pre>' . var_export($sql, true) . '</pre>';
 $db_result = Database::getConnection()->query($sql);
-echo '<pre>' . var_export($db_result, true) . '</pre>';
 
-// header('Location: /thankyou/');
+header('Location: /thankyou/');
